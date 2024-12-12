@@ -4,14 +4,13 @@ const app = express();
 const cors = require("cors");
 app.use(cors());
 app.use(express.json());
-require("dotenv").config();
+require("dotenv").config({ path: "./.env" });
 const PORT = 3001;
+
+console.log("MONGODB_URI:", process.env.MONGODB_URI);
 
 // db connection object
 let db;
-
-// if there is no error in connecting to the database,
-// the server will start to listen on port 3001
 connectToDb((err) => {
   if (!err) {
     app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
@@ -22,7 +21,7 @@ connectToDb((err) => {
 });
 
 // routes
-app.get("/", async (req, res) => {
+app.get("/blog", async (req, res) => {
   try {
     const payload = await db.collection("comments").find().toArray();
     console.log(payload);

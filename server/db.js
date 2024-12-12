@@ -1,6 +1,7 @@
 const { MongoClient } = require("mongodb");
+require("dotenv").config({ path: "./.env" });
 
-const URI = process.env.MONGO_URI;
+const URI = process.env.MONGODB_URI;
 
 let dbConnection;
 
