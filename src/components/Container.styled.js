@@ -8,6 +8,14 @@ const Container = styled.div`
   justify-content: center;
   height: 100%;
   padding: 32px 32px 16px 32px;
+  h1 {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  p {
+    max-width: 960px;
+    text-align: center;
+  }
 `;
 
 export { Container };
