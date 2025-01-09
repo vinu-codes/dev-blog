@@ -45,6 +45,26 @@ app.get("/blog/:id", async (req, res) => {
   }
 });
 
+app.delete("/blog/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    // Fetch the post by ID from MongoDB
+    const Post = model("Post", postSchema);
+    const post = await Post.findByIdAndDelete(id);
+
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
+    res.send(post);
+  } catch (error) {
+    console.error("Error deleting post by ID:", error);
+    res
+      .status(500)
+      .send({ error: "An error occurred while deleting the post" });
+  }
+});
+
 // app.post("/blog", async (req, res) => {
 //   // const Post = mongoose.model("Post", postSchema);
 //   // const blah = new Post({
